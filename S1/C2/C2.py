@@ -1,36 +1,44 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# Write a function that takes two equal-length buffers and produces their XOR combination.
+
 import binascii
 import sys
 import base64
 
-sys.path.insert(0, '../')
-
-from repoC1 import countLetters
-from repoC1 import divisiblebythree
+#sys.path.insert(0, '../')
+#from repoC1 import countLetters
+#from repoC1 import divisiblebythree
 
 # Output
-expected = 'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
+sExpected = "746865206b696420646f6e277420706c6179"
 
 # Input
-s = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
+sInput = "1c0111001f010100061a024b53535009181c"
 
-print("Hex String:", s)
-print("Number of letters:", countLetters(s))
+# Mask
+sXORmask = "686974207468652062756c6c277320657965"
 
-if (divisiblebythree(countLetters(s)) == True): print("The number of string elements is divisible by 3.")
+print("Input:", sInput)
+print("Mask:", sXORmask)
 
-rawbytes = bytearray.fromhex(s)
-print("Hidden message:", rawbytes)
+#################################################
 
-encoded_message = binascii.b2a_base64(rawbytes)
-encoded_message = encoded_message.rstrip() # Remove '\n'
-print("Encoded message:", encoded_message)
+iInput = int(sInput, 16)
+iXORmask = int(sXORmask, 16)
+
+iOutput = iInput ^ iXORmask
+hOutput = hex(iOutput)[2:]
+
+#################################################
+
+print("Output:", hOutput)
 
 # Test if challenged passed.
-if (encoded_message == expected):
+if (hOutput == sExpected):
     print("Challenge Done!! :D :D")
 else:
-    print("Challenge Failed... Keep trying! =)")
+	print("Challenge Failed... Keep trying! =)")
+
+
 
 
